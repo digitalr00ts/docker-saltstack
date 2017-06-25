@@ -1,0 +1,9 @@
+paramiko==2.2.1
+PyNaCl==1.1.2
+python-gnupg
+pyOpenSSL
+cherrypy
+M2Crypto
+dulwich
+MySQL-python
+salt==2016.11.6
