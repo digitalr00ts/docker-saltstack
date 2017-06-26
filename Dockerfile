@@ -26,6 +26,7 @@ RUN set -ex && \
   python -m pip uninstall --yes pip && \
   apk del .build-dependencies ;\
   mkdir -p /etc/pki/tls/certs/ && \
+  echo 'default_include: /opt/salt/master.d/*.conf' > /etc/salt/master && \
   rm -rf -- /var/cache/apk/* /var/lib/apk/* /etc/apk/cache/* /root/.cache
 
 VOLUME ["/opt/salt", "/opt/log", "/srv/salt"]
