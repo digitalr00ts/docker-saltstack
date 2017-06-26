@@ -2,3 +2,4 @@ logs/*
 config/*
 !config/00-*
 extras/get-pip.py
+salt/
