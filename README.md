@@ -19,4 +19,4 @@ This may be added later or in a different build
 # To Dos
 
 * Have Salt run as not root user
-* Ability to add user during `docker run`
+* Maybe log rotation
