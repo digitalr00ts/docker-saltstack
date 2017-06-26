@@ -7,7 +7,7 @@ ENV LANG=en_US.UTF-8 \
 
 COPY files/requirements.txt .
 COPY files/start-salt.sh /usr/local/bin
-COPY files/redis.conf /etc/redis/redis.con
+COPY files/redis.conf /etc/redis/salt.conf
 
 RUN set -ex && \
   apk update && \
@@ -16,7 +16,7 @@ RUN set -ex && \
   groupadd --system saltapi && \
   mkdir -p /var/cache/salt/master/ && \
   apk add python2 libzmq libressl libssh2 libgit2 mariadb-libs libcurl ca-certificates zeromq redis && \
-  apk add --virtual .build-dependencies curl g++ make swig libffi-dev libressl-dev python2-dev mariadb-dev zeromq-dev && \
+  apk add --virtual .build-dependencies curl g++ make swig libffi-dev libressl-dev python2-dev mariadb-dev zeromq-dev curl-dev&& \
   curl -SsLo /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 && \
   chmod +x /usr/local/bin/dumb-init && \
   curl -SsLO https://bootstrap.pypa.io/get-pip.py && \

@@ -1,12 +1,15 @@
 paramiko #==2.2.1
 PyNaCl #==1.1.2
-python-gnupg
 pyOpenSSL
 cherrypy
-M2Crypto
+pyzmq<15
+salt==2016.11.6
+
+pycurl
+redis
 dulwich
 MySQL-python
-pyzmq<15
+
+python-gnupg
+M2Crypto
 #async
-redis
-salt==2016.11.5
