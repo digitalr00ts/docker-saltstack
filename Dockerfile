@@ -5,9 +5,9 @@ ENV LANG=en_US.UTF-8 \
     LC_ALL=en_US.UTF-8 \
     unicode=YES
 
-COPY file/requirements.txt .
-COPY file/start-salt.sh /usr/local/bin
-COPY file/redis.conf /etc/redis/redis.con
+COPY files/requirements.txt .
+COPY files/start-salt.sh /usr/local/bin
+COPY files/redis.conf /etc/redis/redis.con
 
 RUN set -ex && \
   apk update && \
