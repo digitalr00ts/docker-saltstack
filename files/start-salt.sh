@@ -1,6 +1,6 @@
 #!/bin/sh
 
-salt-call --local tls.create_self_signed_cert CN="${HOSTNAME}" && \
+salt-call --local tls.create_self_signed_cert CN="${HOSTNAME}" -l error && \
 	rm -f /var/log/salt/minion
 
 cat > /opt/salt/master.d/01-api.conf << EOF
