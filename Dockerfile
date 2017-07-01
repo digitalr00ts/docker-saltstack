@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:3.6
 
 ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
@@ -14,7 +14,7 @@ RUN set -ex && \
   apk upgrade && \
   apk add shadow && \
   groupadd --system saltapi && \
-  mkdir -p /var/cache/salt/master/ && \
+  mkdir -p /etc/salt/ && mkdir -p /var/cache/salt/master/ && \
   apk add python2 libzmq libressl libssh2 libgit2 mariadb-libs libcurl ca-certificates zeromq redis && \
   apk add --virtual .build-dependencies curl g++ make swig libffi-dev libressl-dev python2-dev mariadb-dev zeromq-dev curl-dev&& \
   curl -SsLo /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 && \
