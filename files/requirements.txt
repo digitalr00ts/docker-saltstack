@@ -11,5 +11,5 @@ dulwich
 MySQL-python
 
 python-gnupg
-M2Crypto
+#M2Crypto
 #async
