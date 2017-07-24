@@ -14,7 +14,7 @@ docker build --no-cache --file alpine/Dockerfile --tag saltstack-alpine:2016.11.
 #Ubuntu
 docker build --no-cache --file ubuntu/Dockerfile -e SALT_VER='2016.11.6' --tag saltstack-ubuntu:2016.11.6 <repo_dir>
 docker build --no-cache --file ubuntu/Dockerfile --tag saltstack-ubuntu:latest <repo_dir>
-docker run --detached saltstack-ubuntu
+docker run --detached --name saltstack-ubuntu -p 4505:4505 -p 4506:4506 -p 8000:8000 --hostname saltmaster saltstack-ubuntu
 ```
 
 # To Dos
