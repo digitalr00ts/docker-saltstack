@@ -1,1 +1,1 @@
-salt==2016.11.6
+# Place for any additional pips and version pinning
