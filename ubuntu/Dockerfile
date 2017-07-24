@@ -1,10 +1,7 @@
 FROM digitalr00ts/ubuntu:16.04
 
-ENV LANG=en_US.UTF-8 \
-    LANGUAGE=en_US:en \
-    LC_ALL=en_US.UTF-8 \
-    unicode=YES
-	SALT_VER=latest
+ENV LC_ALL=C.UTF-8 \
+    SALT_VER=latest
 
 COPY files/requirements.txt .
 COPY files/start-salt.sh /usr/local/bin
@@ -30,7 +27,8 @@ RUN set -ex ;\
   apt --yes purge curl &&\
   apt clean &&\
   rm -rf -- /var/lib/apt/lists/* ;\
-  find /var/log/ -type f -exec rm -f {} \;
+  find /var/log/ -type f -exec rm -f {} \; ;\
+  rm -rf -- /root/.cache ; rm -f /root/.bash_history
 
 VOLUME ["/opt/salt", "/opt/log", "/srv/salt"]
 
