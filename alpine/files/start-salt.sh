@@ -26,6 +26,8 @@ echo "    $(salt-syndic --version)"
 echo "    $(salt-api --version)"
 echo
 
+salt --versions-report
+
 redis-server /etc/redis/salt.conf
 salt-syndic --daemon --config-dir=/opt/salt &
 # api_log_file setting does not exist so setting log file here
