@@ -1,10 +1,16 @@
-[![Build Status](https://travis-ci.org/digitalr00ts/docker-saltstack.svg?branch=dev)](https://travis-ci.org/digitalr00ts/docker-saltstack)<br/>
+[![Build Status](https://travis-ci.org/digitalr00ts/docker-saltstack.svg?branch=dev)](https://travis-ci.org/digitalr00ts/docker-saltstack)
 
 # Saltstack Docker Container
 
 This is my effort to run Salt masters in Docker containers.
 
-## Why not saltstack/docker-containers
+## Features
+
+* Automated builds
+* Available as Alpine or Ubuntu
+* TLS for API enabled by default (self-signed cert generated if no cert found)
+
+### Why not saltstack/docker-containers
 
 * The images on the official [SaltStack repo](https://github.com/saltstack/docker-containers) are not well maintained.
 * There new and better ways manage service(s) within a container, i.e. [tini](https://github.com/krallin/tini).
