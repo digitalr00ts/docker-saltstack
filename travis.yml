@@ -1,0 +1,27 @@
+sudo: required
+
+language: python
+
+python:
+  - "3.6.2"
+
+services:
+  - docker
+
+before_install:
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get -y install docker-ce
+  - "sudo curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose"
+  - sudo chmod +x docker-compose
+
+before_script:
+  - docker version
+  - docker-compose version
+
+script:
+  - cd ubuntu
+  - docker-compose config
+  - docker-compose up -d --build ubuntu-master
+  - 'curl -k https://localhost:8000'
