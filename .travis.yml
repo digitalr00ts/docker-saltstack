@@ -23,4 +23,4 @@ before_script:
 script:
   - docker-compose -f ubuntu/docker-compose.yaml config
   - docker-compose -f ubuntu/docker-compose.yaml up -d --build
-  - 'curl -k https://localhost:8000'
+  - sleep 1 && curl -k https://localhost:8000
