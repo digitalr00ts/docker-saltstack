@@ -21,6 +21,6 @@ before_script:
   - docker-compose version
 
 script:
-  - docker-compose config
+  - docker-compose -f ubuntu/docker-compose.yaml config
   - docker-compose -f ubuntu/docker-compose.yaml up -d --build
   - 'curl -k https://localhost:8000'
