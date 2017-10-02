@@ -1,2 +1,6 @@
-salt
+cherrypy
+docker-py
+libnacl
 pyopenssl
+python-dateutil
+python-gnupg
