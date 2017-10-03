@@ -2,6 +2,8 @@ FROM digitalr00ts/saltstack-base:latest
 
 LABEL maintainer="Carlos@digitalr00ts.com"
 
+ARG SALT_VER=latest
+
 HEALTHCHECK --interval=1m --timeout=3s --start-period=20s --retries=3 \
     CMD nc -zw 1 localhost 4505 && nc -zw 1 localhost 4506 && test-api || exit 1
 
@@ -19,6 +21,7 @@ RUN cd && set -ex && \
   apk --no-cache add --virtual .build-dependencies curl gcc musl-dev libffi-dev libressl-dev python2-dev zeromq-dev curl-dev && \
   curl -SsLO https://bootstrap.pypa.io/get-pip.py && \
   python get-pip.py && rm -f get-pip.py && \
+  pip --no-cache-dir install salt$([ "$SALT_VER" = 'latest' ] || echo "==${SALT_VER}") &&\
   pip --no-cache-dir install -r /root/requirements.txt && \
   rm -f /root/requirements.txt && \
   pip list --format=columns > /root/pip-list.txt && \
