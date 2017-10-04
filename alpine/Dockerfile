@@ -9,18 +9,20 @@ HEALTHCHECK --interval=1m --timeout=3s --start-period=20s --retries=3 \
 
 EXPOSE 4505 4506 8000
 
-VOLUME ['/etc/salt/pki/']
-
-COPY _config /etc/salt
+VOLUME ['/srv/etc/salt/pki/']
 
 RUN cd && set -ex && \
-  mkdir -p /etc/salt/ && mkdir -p /var/cache/salt/master/ && \
+  mkdir -p /srv/etc/salt/master.d/ && mkdir -p /srv/etc/salt/pki/ && \
+  mkdir -p /srv/etc/salt/ssh.d && mkdir -p /etc/salt/ \
+  mkdir -p /var/cache/salt/master/ && \
   apk --no-cache add --virtual .build-dependencies curl gcc musl-dev libffi-dev libressl-dev python2-dev zeromq-dev curl-dev && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/dev/alpine/_files/requirements.txt && \
   curl -SsLO https://bootstrap.pypa.io/get-pip.py && \
   cd /usr/local/bin/ && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/dev/_files/start-salt.sh && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/dev/_files/test-api.py && \
+  curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/dev/_config/master && mv master /etc/salt/ \
+  touch /srv/etc/salt/roster && \
   cd && \
   python get-pip.py && rm -f get-pip.py && \
   pip --no-cache-dir install salt$([ "$SALT_VER" = 'latest' ] || echo "==${SALT_VER}") &&\
