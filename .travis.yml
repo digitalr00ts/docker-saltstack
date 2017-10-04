@@ -20,7 +20,11 @@ before_script:
 script:
 - docker-compose -f alpine/docker-compose.yaml config
 - docker-compose -f alpine/docker-compose.yaml up -d --build
-- sleep 5 && curl -vk https://localhost:8000
+- sleep 3
+- salt-call --master=$(hostname) test.ping || salt-key --accept=$(hostname) --yes
+- salt-call --master=$(hostname) test.ping
+- [ $(salt-call --master=$(hostname) grains.get --output=newline_values_only nodename) = $(hostname) ]
+- curl -vk https://localhost:8000
 notifications:
   slack:
     rooms:
