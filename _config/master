@@ -6,6 +6,7 @@ default_include: /srv/etc/salt/master.d/*.conf
 pki_dir: /srv/etc/salt/pki/master
 ping_on_rotate: True
 roster_file: /srv/etc/salt/roster
+enable_gpu_grains: False
 
 rest_tornado:
   port: 8000
@@ -22,7 +23,6 @@ rest_tornado:
 api_log_file: /var/log/salt/api
 
 # https://docs.saltstack.com/en/develop/topics/ssh/index.html#define-cli-options-with-saltfile
-#
 salt-ssh:
   config_dir: /srv/etc/salt/ssh.d
   max_procs: 30
