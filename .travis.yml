@@ -5,8 +5,8 @@ python:
 services:
 - docker
 before_install:
-- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-- sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu
+- curl -fsSL https://download.docker.com/linux/alpine/gpg | sudo apt-key add -
+- sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/alpine
   $(lsb_release -cs) stable"
 - sudo apt-get update
 - sudo apt-get -y install --only-upgrade openssl curl
@@ -18,8 +18,8 @@ before_script:
 - docker version
 - docker-compose version
 script:
-- docker-compose -f ubuntu/docker-compose.yaml config
-- docker-compose -f ubuntu/docker-compose.yaml up -d --build
+- docker-compose -f alpine/docker-compose.yaml config
+- docker-compose -f alpine/docker-compose.yaml up -d --build
 - sleep 5 && curl -vk https://localhost:8000
 notifications:
   slack:
