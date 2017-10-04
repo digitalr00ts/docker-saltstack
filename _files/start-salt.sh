@@ -1,6 +1,6 @@
 #!/bin/sh
 
-salt-call --local tls.create_self_signed_cert ca.cert_base_path='/srv/etc/pki' tls_dir='salt-api' -l error && \
+salt-call --local tls.create_self_signed_cert cacert_path='/srv/etc/pki' tls_dir='salt-api' -l error && \
 	rm -f /var/log/salt/minion
 
 echo
