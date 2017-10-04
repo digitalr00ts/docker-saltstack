@@ -11,18 +11,20 @@ EXPOSE 4505 4506 8000
 
 VOLUME ['/etc/salt/pki/']
 
-COPY _files/requirements.txt /root/requirements.txt
-COPY _files/start-salt.sh /usr/local/bin/start-salt
-COPY _files/test-api.py /usr/local/bin/test-api
 COPY _config /etc/salt
 
 RUN cd && set -ex && \
   mkdir -p /etc/salt/ && mkdir -p /var/cache/salt/master/ && \
   apk --no-cache add --virtual .build-dependencies curl gcc musl-dev libffi-dev libressl-dev python2-dev zeromq-dev curl-dev && \
+  curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/dev/alpine/_files/requirements.txt && \
   curl -SsLO https://bootstrap.pypa.io/get-pip.py && \
+  cd /usr/local/bin/ && \
+  curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/dev/_files/start-salt.sh && \
+  curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/dev/_files/test-api.py && \
+  cd && \
   python get-pip.py && rm -f get-pip.py && \
   pip --no-cache-dir install salt$([ "$SALT_VER" = 'latest' ] || echo "==${SALT_VER}") &&\
-  pip --no-cache-dir install -r /root/requirements.txt && \
+  pip --no-cache-dir install -r requirements.txt && \
   rm -f /root/requirements.txt && \
   pip list --format=columns > /root/pip-list.txt && \
   python -m pip uninstall --yes pip && \
