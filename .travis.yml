@@ -21,9 +21,12 @@ script:
 - docker-compose -f alpine/docker-compose.yaml config
 - docker-compose -f alpine/docker-compose.yaml up -d --build
 - sleep 3
-- salt-call --master=$(hostname) test.ping || salt-key --accept=$(hostname) --yes
-- salt-call --master=$(hostname) test.ping
-- [ $(salt-call --master=$(hostname) grains.get --output=newline_values_only nodename) = $(hostname) ]
+- docker-compose -f alpine/docker-compose.yaml exec saltmaster sh -c \
+  'salt-call --master=$(hostname) test.ping || salt-key --accept=$(hostname) --yes'
+- docker-compose -f alpine/docker-compose.yaml exec saltmaster sh -c \
+  'salt-call --master=$(hostname) test.ping'
+- docker-compose -f alpine/docker-compose.yaml exec saltmaster sh -c \
+  '[ $(salt-call --master=$(hostname) grains.get --output=newline_values_only nodename) = $(hostname) ]'
 - curl -vk https://localhost:8000
 notifications:
   slack:
