@@ -8,3 +8,8 @@ services:
       - 8000:8000
     ulimits:
       nofile: 10000
+#    cap_drop:
+#      - CAP_CHOWN
+#      - CAP_NET_BIND_SERVICE
+#      - CAP_SYS_BOOT
+#      - CAP_SYS_TIME
