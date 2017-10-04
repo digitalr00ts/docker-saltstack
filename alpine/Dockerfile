@@ -20,8 +20,11 @@ RUN cd && set -ex && \
   curl -SsLO https://bootstrap.pypa.io/get-pip.py && \
   cd /usr/local/bin/ && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/dev/_files/start-salt.sh && \
+    chmod +x start-salt.sh && mv start-salt.sh start-salt && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/dev/_files/test-api.py && \
-  curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/dev/_config/master && mv master /etc/salt/ \
+    chmod +x test-api.py && mv test-api.py test-api && \
+  curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/dev/_config/master && \
+    mv master /etc/salt/ && \
   touch /srv/etc/salt/roster && \
   cd && \
   python get-pip.py && rm -f get-pip.py && \
