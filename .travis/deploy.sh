@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 [ "${TRAVIS_PULL_REQUEST}" != 'false' ] && exit
 [ "${TRAVIS_BRANCH}" != 'develop' ] && exit
 
