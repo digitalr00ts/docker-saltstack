@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/digitalr00ts/docker-saltstack.svg?branch=dev)](https://travis-ci.org/digitalr00ts/docker-saltstack)
+[![Build Status](https://travis-ci.org/digitalr00ts/docker-saltstack.svg?branch=develop)](https://travis-ci.org/digitalr00ts/docker-saltstack)
 
 # Saltstack Docker Container
 
