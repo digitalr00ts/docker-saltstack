@@ -19,13 +19,13 @@ RUN cd && set -ex && \
   mkdir -p /var/cache/salt/master/ && \
   apk --no-cache add --virtual .build-dependencies curl gcc musl-dev libffi-dev libressl-dev python2-dev zeromq-dev curl-dev && \
   curl -SsLO https://bootstrap.pypa.io/get-pip.py && \
-  curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/dev/alpine/_files/requirements.txt && \
-  curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/dev/_config/master && \
+  curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/alpine/_files/requirements.txt && \
+  curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/_config/master && \
     mv master /etc/salt/ && \
   cd /usr/local/bin/ && \
-  curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/dev/_files/start-salt.sh && \
+  curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/_files/start-salt.sh && \
     chmod +x start-salt.sh && mv start-salt.sh start-salt && \
-  curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/dev/_files/test-api.py && \
+  curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/_files/test-api.py && \
     chmod +x test-api.py && mv test-api.py test-api && \
   touch /srv/etc/salt/roster && \
   cd && \
