@@ -30,6 +30,8 @@ script:
 - curl -vk https://localhost:8000
 after_success:
 - .travis/deploy.sh
+after_failure:
+- docker-compose -f alpine/docker-compose.yaml logs
 branches:
   except:
   - master
