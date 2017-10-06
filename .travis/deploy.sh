@@ -9,7 +9,8 @@ GIT_BASE='master'
 
 mkdir -p ~/.ssh/
 openssl aes-256-cbc -K $encrypted_68d9c38e7b4c_key -iv $encrypted_68d9c38e7b4c_iv -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
-chmod -r 400 ~/.ssh/
+chmod 700 ~/.ssh/
+chmod 400 ~/.ssh/id_rsa
 
 git fetch origin ${GIT_BASE}:${GIT_BASE}
 git checkout ${GIT_BASE}
