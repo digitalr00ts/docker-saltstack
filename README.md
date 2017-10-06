@@ -24,8 +24,6 @@ This is my effort to run Salt masters in Docker containers.
   * `/etc/salt/master.d` to `/opt/salt/master.d`
   * `/etc/salt/pki/` to `/opt/salt/pki/`
 * Add volumes to docker-compose
-* docker-compose for Alpine
-* Merge dev to master if test pass
 * Move docker hub to watch master
 
 ## Anchor.io
