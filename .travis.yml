@@ -1,7 +1,5 @@
 sudo: required
 language: python
-python:
-- 3.6.2
 services:
 - docker
 before_install:
@@ -22,16 +20,24 @@ script:
 - docker-compose -f alpine/docker-compose.yaml up -d --build
 - docker-compose -f alpine/docker-compose.yaml ps
 - sleep 3
-- docker-compose -f alpine/docker-compose.yaml exec saltmaster sh -c \
-  'salt-call --master=$(hostname) test.ping || salt-key --accept=$(hostname) --yes'
-- docker-compose -f alpine/docker-compose.yaml exec saltmaster sh -c \
-  'salt-call --master=$(hostname) test.ping'
-- docker-compose -f alpine/docker-compose.yaml exec saltmaster sh -c \
-  '[ $(salt-call --master=$(hostname) grains.get --output=newline_values_only nodename) = $(hostname) ]'
+- docker-compose -f alpine/docker-compose.yaml exec saltmaster sh -c \ 'salt-call
+  --master=$(hostname) test.ping || salt-key --accept=$(hostname) --yes'
+- docker-compose -f alpine/docker-compose.yaml exec saltmaster sh -c \ 'salt-call
+  --master=$(hostname) test.ping'
+- docker-compose -f alpine/docker-compose.yaml exec saltmaster sh -c \ '[ $(salt-call
+  --master=$(hostname) grains.get --output=newline_values_only nodename) = $(hostname)
+  ]'
 - curl -vk https://localhost:8000
+after_success:
+- .travis/deploy.sh
+branches:
+  except:
+  - master
+  - X-archive
 notifications:
   slack:
     rooms:
       secure: OC8BIRtvReJ4AWXg1Hc6lLulTk+N4V1BUD9u7P0J21Z47DSN9mEi7Or0qZtKZIGuTiTv8K9IAmi0AF2xoztU3myJSdwre2tZFzXhtIZwGIIOryQTrhdbE9Rg3l0UVOTZ6gDLtBI2ttZ6ZadI0GkVPO69csH4usMiKLufCKd34XZDzClrsNJjKWsQc1Y3fGOyRLy/NhDWTfPYHB033El73JQogaGhLg5UhLoz0/laFAUI9FadNFtY5rsWqoEVzFWZSNmPH//j4+WoeunyPJNNRNhQORBO2iDd8fkxTuZxyQPX6H6o9BVeaJvnHtpu5+tzTetPh0V3D+JDbGwdzx/rvWGbDB9n/3ebgzUZdbYTZ6x1YSxiIpPjAgTYBrxZWAx8imw5bjlPbdwTzDsryHKcmOyG8ISaUHTiaiVYHcDqvo7fSYqCDAOAYL3KmhECMZDcCFDpyIfK7hiitB4Ki5qZ4mjuEn6bytQsmv2zE2OYK9kjKAEn5DChqISyXOYRuCeESOc2+7Y2Bq2zsd5C/Q1w1WDAGWIKideF5/+z1ye1Pub7MblV1nSGmg05knnXsnqNUShk1v1dvgcvTVpB6aEhJY1HZmXixeb9v0RB14q1t6V3pa7hJlUTotwjIc8U0UG1q8JVMGV+0idkksP+ax5a9QzMEnXUv451sXeczPveQa8=
-  on_success: change
+  on_success: always
   on_failure: always
+
