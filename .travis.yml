@@ -44,6 +44,7 @@ jobs:
       env:
       - distro=all
       before_install: ''
+      install: ''
       script:
       - .travis/deploy.sh
       after_failure: ''
