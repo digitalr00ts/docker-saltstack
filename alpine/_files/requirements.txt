@@ -1,3 +1,4 @@
+apache-libcloud
 docker-py
 gitpython
 libnacl
