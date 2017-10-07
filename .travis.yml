@@ -2,6 +2,14 @@ sudo: required
 language: python
 services:
 - docker
+env:
+- distro=alpine
+- distro=ubuntu
+stages:
+- test
+- name: deploy
+  if: branch = develop
+
 before_install:
 - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu
@@ -12,26 +20,34 @@ before_install:
 - sudo curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname
   -s`-`uname -m` -o /usr/local/bin/docker-compose
 - sudo chmod +x /usr/local/bin/docker-compose
-before_script:
 - docker version
 - docker-compose version
 script:
-- docker-compose -f alpine/docker-compose.yaml config
-- docker-compose -f alpine/docker-compose.yaml up -d --build
-- docker-compose -f alpine/docker-compose.yaml ps
+- docker-compose -f ${distro}/docker-compose.yaml config
+- docker-compose -f ${distro}/docker-compose.yaml up -d --build
+- docker-compose -f ${distro}/docker-compose.yaml ps
 - sleep 3
-- docker-compose -f alpine/docker-compose.yaml exec saltmaster sh -c \ 'salt-call
+- docker-compose -f ${distro}/docker-compose.yaml exec saltmaster sh -c \ 'salt-call
   --master=$(hostname) test.ping || salt-key --accept=$(hostname) --yes'
-- docker-compose -f alpine/docker-compose.yaml exec saltmaster sh -c \ 'salt-call
+- docker-compose -f ${distro}/docker-compose.yaml exec saltmaster sh -c \ 'salt-call
   --master=$(hostname) test.ping'
-- docker-compose -f alpine/docker-compose.yaml exec saltmaster sh -c \ '[ $(salt-call
+- docker-compose -f ${distro}/docker-compose.yaml exec saltmaster sh -c \ '[ $(salt-call
   --master=$(hostname) grains.get --output=newline_values_only nodename) = $(hostname)
   ]'
 - curl -vk https://localhost:8000
-after_success:
-- .travis/deploy.sh
 after_failure:
-- docker-compose -f alpine/docker-compose.yaml logs
+- docker-compose -f ${distro}/docker-compose.yaml logs
+
+jobs:
+  include:
+    - stage: deploy
+      env:
+      - distro=all
+      before_install: ''
+      script:
+      - .travis/deploy.sh
+      after_failure: ''
+
 branches:
   except:
   - master
