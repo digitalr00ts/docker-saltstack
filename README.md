@@ -20,11 +20,8 @@ This is my effort to run Salt masters in Docker containers.
 
 * Better testing
 * Run salt service as not root
-* Move
-  * `/etc/salt/master.d` to `/opt/salt/master.d`
-  * `/etc/salt/pki/` to `/opt/salt/pki/`
 * Add volumes to docker-compose
-* Move docker hub to watch master
+* Change curl/wget url to use ARG for branch
 
 ## Anchor.io
 
