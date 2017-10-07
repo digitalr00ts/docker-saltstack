@@ -19,7 +19,7 @@ RUN cd && set -ex && \
   mkdir -p /var/cache/salt/master/ && \
   apk --no-cache add --virtual .build-dependencies curl gcc musl-dev libffi-dev libressl-dev python2-dev zeromq-dev curl-dev && \
   curl -SsLO https://bootstrap.pypa.io/get-pip.py && \
-  curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/alpine/_files/requirements.txt && \
+  curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/_files/requirements.txt && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/_config/master && \
     mv master /etc/salt/ && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/_files/start-salt.sh && \
