@@ -22,13 +22,11 @@ RUN cd && set -ex && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/alpine/_files/requirements.txt && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/_config/master && \
     mv master /etc/salt/ && \
-  cd /usr/local/bin/ && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/_files/start-salt.sh && \
-    chmod +x start-salt.sh && mv start-salt.sh start-salt && \
+    chmod +x start-salt.sh && mv start-salt.sh /usr/local/bin/start-salt && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/_files/test-api.py && \
-    chmod +x test-api.py && mv test-api.py test-api && \
+    chmod +x test-api.py && mv test-api.py /usr/local/bin/test-api && \
   touch /srv/etc/salt/roster && \
-  cd && \
   python get-pip.py && rm -f get-pip.py && \
   pip --no-cache-dir install salt$([ "$SALT_VER" = 'latest' ] || echo "==${SALT_VER}") &&\
   pip --no-cache-dir install -r requirements.txt && \
