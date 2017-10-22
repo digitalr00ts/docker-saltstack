@@ -33,12 +33,19 @@ RUN cd && set -ex && \
     chmod +x test-api.py && mv test-api.py /usr/local/bin/test-api && \
   \
   apt-get install -y --no-install-recommends \
+  git \
   # salt-common #
   python-tornado \
   # salt-master #
+  python-crypto \
+  python-git \
   python-zmq \
-  # salt-cloud #
+  # salt-api # (recommends only)
+  #python-cherrypy3 \
+  # salt-cloud # (recommends and suggests)
   python-libcloud \
+  python-netaddr \
+  #python-botocore \
   && \
   wget --https-only --no-cookies --no-hsts --no-cache --no-verbose https://bootstrap.pypa.io/get-pip.py && \
   python get-pip.py && rm -f get-pip.py && \
