@@ -15,13 +15,13 @@ before_install:
 - sudo sh -c 'echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release
   -cs) stable" > /etc/apt/sources.list.d/docker.list'
 - sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/docker.list
+install:
 - sudo apt-get -y install docker-ce
-- sudo curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname
+- sudo curl -fsSL https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname
   -s`-`uname -m` -o /usr/local/bin/docker-compose
 - sudo chmod +x /usr/local/bin/docker-compose
 - docker version
 - docker-compose version
-install: true
 script:
 - docker-compose -f ${distro}/docker-compose.yaml config
 - docker-compose -f ${distro}/docker-compose.yaml up -d --build
@@ -43,10 +43,11 @@ jobs:
     - stage: deploy
       env:
       - distro=all
-      before_install: true
+      before_install: ''
+      install: true
       script:
       - .travis/deploy.sh
-      after_failure: true
+      after_failure: ''
 
 branches:
   except:
