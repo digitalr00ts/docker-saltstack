@@ -12,11 +12,6 @@ EXPOSE 4505 4506 8000
 VOLUME ['/srv/etc/salt/pki/']
 
 RUN cd && set -ex && \
-  mkdir -p /srv/etc/salt/master.d/ && mkdir -p /srv/etc/salt/pki/ && \
-  mkdir -p /srv/etc/salt/ssh.d/ && \
-  mkdir -p /srv/salt/ && mkdir /srv/pillar/ && \
-  mkdir -p /etc/salt/ && \
-  mkdir -p /var/cache/salt/master/ && \
   apk --no-cache add --virtual .build-dependencies curl gcc musl-dev libffi-dev libressl-dev python2-dev zeromq-dev curl-dev && \
   curl -SsLO https://bootstrap.pypa.io/get-pip.py && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/_files/requirements.txt && \
