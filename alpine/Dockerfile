@@ -13,7 +13,7 @@ VOLUME ['/srv/etc/salt/pki/']
 
 RUN cd && set -ex && \
   apk add --update --virtual .build-dependencies curl gcc musl-dev libffi-dev libressl-dev python2-dev zeromq-dev curl-dev && \
-  apk add py-mysqldb git && \
+  apk add py-mysqldb git ca-certificates && \
   curl -SsLO https://bootstrap.pypa.io/get-pip.py && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/_files/requirements.txt && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/_config/master && \
