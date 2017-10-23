@@ -56,11 +56,11 @@ RUN cd && set -ex && \
   python -m pip uninstall --yes pip && \
   \
   apt-get purge -y wget lsb-release \
-    apt-transport-https ca-certificates && \
+    apt-transport-https && \
   apt-get autoremove -y && \
   apt-get clean && \
   rm -rf -- /tmp/* /var/tmp/* \
      /var/cache/apt/* /var/lib/apt/lists/* \
-     /root/.gnupg
+     /root/.gnupg /root/.cache
 
 CMD ["/usr/local/bin/start-salt"]
