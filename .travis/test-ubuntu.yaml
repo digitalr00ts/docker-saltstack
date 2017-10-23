@@ -1,0 +1,16 @@
+version: '3.2'
+services:
+  saltmaster:
+    hostname: salt
+    build: ../ubuntu/
+    ports:
+      - 4505:4505
+      - 4506:4606
+      - 8000:8000
+    volumes:
+      - type: bind
+        source: ./_config
+        target: /srv/etc/salt/master.d
+        read_only: true
+volumes:
+  _config:
