@@ -19,7 +19,7 @@ RUN cd && set -ex && \
     https://repo.saltstack.com/apt/ubuntu/$(lsb_release --release --short)/amd64/${SALT_VER}/SALTSTACK-GPG-KEY.pub | apt-key add - && \
   echo "deb http://repo.saltstack.com/apt/ubuntu/$(lsb_release --release --short)/amd64/${SALT_VER} $(lsb_release --codename --short) main" \
     > /etc/apt/sources.list.d/saltstack.list && \
-  apt-get update  -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/saltstack.list && \
+  apt-get update && \
   wget --https-only --no-cookies --no-hsts --no-cache --no-verbose \
     https://github.com/digitalr00ts/docker-saltstack/raw/develop/_files/requirements.txt && \
   wget --https-only --no-cookies --no-hsts --no-cache --no-verbose \
