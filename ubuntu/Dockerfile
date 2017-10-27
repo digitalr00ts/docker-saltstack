@@ -33,12 +33,12 @@ RUN cd && set -ex && \
     chmod +x test-api.py && mv test-api.py /usr/local/bin/test-api && \
   \
   apt-get install -y --no-install-recommends \
-  git \
+  python-pygit2 \
   # salt-common #
   python-tornado \
   # salt-master #
   python-crypto \
-  python-git \
+  #python-git \
   python-zmq \
   # salt-api # (recommends only)
   #python-cherrypy3 \
@@ -61,6 +61,7 @@ RUN cd && set -ex && \
   apt-get clean && \
   rm -rf -- /tmp/* /var/tmp/* \
      /var/cache/apt/* /var/lib/apt/lists/* \
-     /root/.gnupg /root/.cache
+     /root/.gnupg /root/.cache \
+     /usr/share/dh-python/dhpython/build
 
 CMD ["/usr/local/bin/start-salt"]
