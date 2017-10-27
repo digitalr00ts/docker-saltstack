@@ -12,8 +12,8 @@ EXPOSE 4505 4506 8000
 VOLUME ['/srv/etc/salt/pki/']
 
 RUN cd && set -ex && \
-  apk add --update --virtual .build-dependencies curl gcc musl-dev libffi-dev libressl-dev python2-dev zeromq-dev curl-dev libgit2-dev && \
-  apk add py-mysqldb libgit2 git ca-certificates && \
+  apk add --update --virtual .build-dependencies curl gcc make cmake musl-dev libffi-dev libressl-dev python2-dev zeromq-dev curl-dev libgit2-dev libssh2-dev && \
+  apk add py-mysqldb libgit2 libssh2 libpthread-stubs git ca-certificates && \
   curl -SsLO https://bootstrap.pypa.io/get-pip.py && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/_files/requirements.txt && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/_config/master && \
@@ -24,7 +24,12 @@ RUN cd && set -ex && \
     chmod +x test-api.py && mv test-api.py /usr/local/bin/test-api && \
   touch /srv/etc/salt/roster && \
   python get-pip.py && rm -f get-pip.py && \
-  pip --no-cache-dir install 'cffi<1.10' && pip --no-cache-dir install 'pygit2<0.26' && \
+  git clone --branch v0.26.0 --depth 1 https://github.com/libgit2/libgit2.git && \
+    cd libgit2 && \
+    cmake -DTHREADSAFE=ON -DCMAKE_BUILD_TYPE=Release && \
+    make && make install && \
+    cd && rm -rf libgit2 && \
+  pip --no-cache-dir install 'pygit2<0.27' && \
   pip --no-cache-dir install salt$([ "$SALT_VER" = 'latest' ] || echo "==${SALT_VER}") && \
   pip --no-cache-dir install -r requirements.txt && \
   rm -f /root/requirements.txt && \

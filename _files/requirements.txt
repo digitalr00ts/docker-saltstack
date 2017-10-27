@@ -1,7 +1,6 @@
 apache-libcloud
 docker-py
 libnacl
-pygit2
 pyopenssl
 python-dateutil
 python-gnupg
