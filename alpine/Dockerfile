@@ -12,7 +12,7 @@ EXPOSE 4505 4506 8000
 VOLUME ['/srv/etc/salt/pki/']
 
 RUN cd && set -ex && \
-  apk add --update --virtual .build-dependencies curl gcc musl-dev libffi-dev libressl-dev python2-dev zeromq-dev curl-dev && \
+  apk add --update --virtual .build-dependencies curl gcc musl-dev libffi-dev libressl-dev python2-dev zeromq-dev curl-dev libgit2-dev && \
   apk add py-mysqldb libgit2 git ca-certificates && \
   curl -SsLO https://bootstrap.pypa.io/get-pip.py && \
   curl -SsLO https://github.com/digitalr00ts/docker-saltstack/raw/develop/_files/requirements.txt && \
