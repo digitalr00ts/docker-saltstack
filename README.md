@@ -27,16 +27,17 @@ docker run -d --name saltstack digitalr00ts/saltstack
 ### Build test
 
 ```sh
-docker-compose -f <distro>/docker-compose.yaml up -d --build
+docker-compose -f .travis/compose-<distro>.yaml up -d --build
 ```
 
 ## Todos
 
 * Better testing
-  * GitFS for states
 * Run salt service as not root
 * Add volumes to docker-compose
 * Change curl/wget url to use ARG for branch
+* Ability to build Saltstack off commit
+  * and point at any git url
 * Better documentation
   * Usage / paths
   * Layers
