@@ -14,11 +14,16 @@ services:
         source: ./_config
         target: /srv/etc/salt/master.d
         read_only: true
+    volumes:
+      - type: bind
+        source: ./salt
+        target: /srv/salt
+        read_only: true
 #    cap_drop:
 #      - CAP_CHOWN
 #      - CAP_NET_BIND_SERVICE
 #      - CAP_SYS_BOOT
 #      - CAP_SYS_TIME
 
-volumes:
-  _config:
+#volumes:
+#  _config:

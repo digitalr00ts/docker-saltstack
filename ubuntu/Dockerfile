@@ -33,7 +33,6 @@ RUN cd && set -ex && \
     chmod +x test-api.py && mv test-api.py /usr/local/bin/test-api && \
   \
   apt-get install -y --no-install-recommends \
-  python-pygit2 \
   # salt-common #
   python-tornado \
   # salt-master #
