@@ -24,6 +24,8 @@ install:
 - docker-compose version
 script:
 - .travis/test.sh
+after_failure:
+- docker-compose -f .travis/compose-${distro}.yaml logs
 
 jobs:
   include:
