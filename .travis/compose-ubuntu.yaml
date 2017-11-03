@@ -14,7 +14,6 @@ services:
         source: ./_config
         target: /srv/etc/salt/master.d
         read_only: true
-    volumes:
       - type: bind
         source: ./salt
         target: /srv/salt
