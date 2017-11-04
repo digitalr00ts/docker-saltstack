@@ -34,7 +34,6 @@ docker-compose -f .travis/compose-<distro>.yaml up -d --build
 
 * Better testing
 * Run salt service as not root
-* Add volumes to docker-compose
 * Change curl/wget url to use ARG for branch
 * Ability to build Saltstack off commit
   * and point at any git url
