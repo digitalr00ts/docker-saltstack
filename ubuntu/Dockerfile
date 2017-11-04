@@ -7,7 +7,7 @@ ARG SALT_VER=latest
 HEALTHCHECK --interval=1m --timeout=3s --start-period=20s --retries=3 \
     CMD nc -zw 1 localhost 4505 && nc -zw 1 localhost 4506 && test-api || exit 1
 
-EXPOSE 4505 4506 8000
+EXPOSE 4505 4506
 
 VOLUME ['/srv/etc/salt/pki/']
 

@@ -1,0 +1,8 @@
+# Defaults for SaltStack container
+# Author: digitalr00ts
+
+default_include: /srv/etc/salt/minion.d/*.conf
+#user: root
+pki_dir: /srv/etc/salt/pki/minion
+enable_gpu_grains: False
+

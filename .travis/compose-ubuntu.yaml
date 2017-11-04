@@ -2,10 +2,12 @@ version: '3.3'
 services:
   saltmaster:
     hostname: salt
-    build: ../ubuntu/
+    build: ../ubuntu
+    #env_file:
+    expose:
+      - 4505
+      - 4506
     ports:
-      - 4505:4505
-      - 4506:4606
       - 8000:8000
     ulimits:
       nofile: 10000
@@ -18,8 +20,28 @@ services:
         source: ./salt
         target: /srv/salt
         read_only: true
-#    cap_drop:
-#      - CAP_CHOWN
-#      - CAP_NET_BIND_SERVICE
-#      - CAP_SYS_BOOT
-#      - CAP_SYS_TIME
+      - type: volume
+        source: saltmaster-pki
+        target: /srv/etc/salt/pki/
+  saltminion:
+    hostname: minion
+    build: minion
+    ulimits:
+      nofile: 10000
+    expose: []
+    volumes:
+      - type: volume
+        source: saltminion-pki
+        target: /srv/etc/salt/pki/
+    links:
+      - saltmaster:salt
+    depends_on:
+      - saltmaster
+#cap_drop:
+#  - CAP_CHOWN
+#  - CAP_NET_BIND_SERVICE
+#  - CAP_SYS_BOOT
+#  - CAP_SYS_TIME
+volumes:
+  saltmaster-pki:
+  saltminion-pki:
