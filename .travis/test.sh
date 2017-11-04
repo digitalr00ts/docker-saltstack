@@ -3,7 +3,7 @@
 set -ex
 
 #BUILD
-docker-compose -f .travis/compose-${distro}.yaml build --no-cache --pull
+docker-compose -f .travis/compose-${distro}.yaml build --no-cache
 docker-compose -f .travis/compose-${distro}.yaml up -d
 docker-compose -f .travis/compose-${distro}.yaml ps && sleep 3
 
