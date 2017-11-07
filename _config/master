@@ -8,6 +8,12 @@ ping_on_rotate: True
 roster_file: /srv/etc/salt/roster
 enable_gpu_grains: False
 
+fileserver_backend:
+  - roots
+file_roots:
+  base:
+    - /srv/salt
+
 rest_tornado:
   port: 8000
   ssl_crt: /srv/etc/pki/salt-api/certs/localhost.crt
