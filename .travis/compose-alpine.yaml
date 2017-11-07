@@ -41,7 +41,7 @@ services:
       - type: volume
         source: saltminion-pki
         target: /srv/etc/salt/pki/
-    entrypoint: ["/sbin/tini", "-g", "salt-minion"]
+    entrypoint: ["tini", "-g", "--", "salt-minion"]
     links:
       - saltmaster:salt
     depends_on:
