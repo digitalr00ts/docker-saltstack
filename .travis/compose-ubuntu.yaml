@@ -20,19 +20,28 @@ services:
         source: ./salt
         target: /srv/salt
         read_only: true
+      - type: bind
+        source: ./minion/_config/minion
+        target: /etc/salt/minion
+        read_only: true
       - type: volume
         source: saltmaster-pki
         target: /srv/etc/salt/pki/
   saltminion:
     hostname: minion
-    build: minion
+    image: travis_saltmaster
+    #build: minion
     ulimits:
       nofile: 10000
     expose: []
     volumes:
+      - type: bind
+        source: ./minion/_config/minion
+        target: /etc/salt/minion
       - type: volume
         source: saltminion-pki
         target: /srv/etc/salt/pki/
+    entrypoint: ["/sbin/tini", "-g", "salt-minion"]
     links:
       - saltmaster:salt
     depends_on:
