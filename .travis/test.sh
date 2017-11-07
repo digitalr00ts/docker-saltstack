@@ -12,4 +12,5 @@ docker-compose -f .travis/compose-${distro}.yaml exec saltmaster salt-run manage
 docker-compose -f .travis/compose-${distro}.yaml exec saltminion salt-call test.ping
 docker-compose -f .travis/compose-${distro}.yaml exec saltminion salt-call grains.get oscodename
 docker-compose -f .travis/compose-${distro}.yaml exec saltmaster salt '*'  state.apply
+docker-compose -f .travis/compose-${distro}.yaml exec saltminion salt-call foo.bar
 curl -vk https://localhost:8000
