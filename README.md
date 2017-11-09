@@ -33,15 +33,37 @@ docker-compose -f .travis/compose-<distro>.yaml up -d --build
 ## Todos
 
 * Better testing
-* Run salt service as not root
 * Change curl/wget url to use ARG for branch
 * Ability to build Saltstack off commit
   * and point at any git url
 * Better documentation
   * Usage / paths
-  * Layers
+
+## Notes / FAQ
+
+### Layers - How is this container put together?
+
+| Alpine | Ubuntu |
+| ------ | ------ |
+| [Upstream Alpine](https://hub.docker.com/_/alpine/) | [Upstream Ubuntu](https://hub.docker.com/_/ubuntu/) |
+| [digitalr00ts Base](https://hub.docker.com/r/digitalr00ts/os/):alpine | [digitalr00ts Base](https://hub.docker.com/r/digitalr00ts/os/):ubuntu |
+| [SaltStack Base](https://hub.docker.com/r/digitalr00ts/saltstack-base/):alpine | [SaltStack Base](https://hub.docker.com/r/digitalr00ts/saltstack-base/):ubuntu |
+| [SaltStack](https://hub.docker.com/r/digitalr00ts/saltstack/):alpine | [SaltStack](https://hub.docker.com/r/digitalr00ts/saltstack/):ubuntu |
+
+1. We start with the upstream OS container image
+2. Then we have a small layer that is common to most digitar00ts containers to simplify infrastructure management.
+3. After we create a layer of common dependencies for SaltStack, regardless of version.
+4. Finally, the desired version of SaltStack is installed and any version dependant dependencies are installed.
+
+### Why are there multiple services in one container?
+
+There salt services are tightly coupled, based on both functionality and version. Therefore, we felt a monolithic container was appropriate here.
+
+### Why do the e services run as root?
+
+Salt requires root to access such things as PAM for authentication. While many best practices suggest to not run as root, we felt the loss in functionality was not worth the trade off. See https://docs.saltstack.com/en/latest/ref/configuration/nonroot.html
 
 ## Anchor.io
 
-* Alpine: [![Anchore Image Overview](https://anchore.io/service/badges/image/0eee9477226f99e9fd655776b93942ba9207b0b25ca56bee76cd104f698da231)](https://anchore.io/image/dockerhub/0eee9477226f99e9fd655776b93942ba9207b0b25ca56bee76cd104f698da231?repo=digitalr00ts%2Fsaltstack&tag=latest)
-* Ubuntu: [![Anchore Image Overview](https://anchore.io/service/badges/image/2a7fb41b7529b11f238953c6eab4bce66da9382e8ad215b4c9552643d7ef5b49)](https://anchore.io/image/dockerhub/2a7fb41b7529b11f238953c6eab4bce66da9382e8ad215b4c9552643d7ef5b49?repo=digitalr00ts%2Fsaltstack&tag=ubuntu)
+* Alpine: [![Anchore Image Overview](https://anchore.io/service/badges/image/0eee9477226f99e9fd655776b93942ba9207b0b25ca56bee76cd104f698da231)](https://anchore.io/image/dockerhub/digitalr00ts%2Fsaltstack%3Alatest)
+* Ubuntu: [![Anchore Image Overview](https://anchore.io/service/badges/image/2a7fb41b7529b11f238953c6eab4bce66da9382e8ad215b4c9552643d7ef5b49)](https://anchore.io/image/dockerhub/digitalr00ts%2Fsaltstack%3Aubuntu)
