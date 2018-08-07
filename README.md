@@ -63,6 +63,26 @@ There salt services are tightly coupled, based on both functionality and version
 
 Salt requires root to access such things as PAM for authentication. While many best practices suggest to not run as root, we felt the loss in functionality was not worth the trade off. See https://docs.saltstack.com/en/latest/ref/configuration/nonroot.html
 
+## License
+
+LGPL-3.0-or-later
+
+
+    This is free software: you can redistribute it and/or modify
+    it under the terms of the Lesser GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    any later version.
+
+    This is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    Lesser GNU General Public License for more details.
+
+    You should have received a copy of the Lesser GNU General Public License
+    along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+
+Copyright 2017, 2018 digitalr00ts
+
 ## Anchor.io
 
 * Alpine: [![Anchore Image Overview](https://anchore.io/service/badges/image/0eee9477226f99e9fd655776b93942ba9207b0b25ca56bee76cd104f698da231)](https://anchore.io/image/dockerhub/digitalr00ts%2Fsaltstack%3Alatest)
